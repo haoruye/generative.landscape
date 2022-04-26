@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	 Generative Landscape       
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+
+<style>
+	
+img.Image{
+    height:100%;
+    max-height:350px
+};
+
+
+h1 {
+    font-size: 20px;
+	font-family: bookman old style;
+	font-weight: 100px;
+}
+
+a{
+	font-size: 15px;
+}
+
+a:link {
+    color: #282828;
+    background-color: transparent;
+    text-decoration: underline;
+    font: bookman old style; 
+}
+a:visited {
+    color: #282828;
+    background-color: transparent;
+    text-decoration: none;
+    font: bookman old style;
+}
+a:hover {
+    color: #c0c0c0;
+    background-color: #000000;
+    text-decoration: none;
+    font: bookman old style;
+}
+a:active {
+    color: #c0c0c0;
+    background-color: #000000;
+    text-decoration: none;
+    font: bookman old style;
+}
+
+</style>
+
+
+</head>
+<body>
+	
+	
+	
+
+
+<script>
+	
+//generate random int
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); 
+//The maximum is exclusive and the minimum is inclusive
+}
+
+
+//strokes
+var moveToX = getRandomInt(0,1000); 
+var moveToY = getRandomInt(300,700); 
+
+var lineToX1 = getRandomInt(0,1000); 
+var lineToY1 = getRandomInt(220,550);  
+
+var lineToX2 = getRandomInt(0,1000); 
+var lineToY2 = getRandomInt(220,550); 
+
+var randomWidth = getRandomInt(80,300);
+
+//sun
+var sunX = getRandomInt(30,970); 
+var sunY = getRandomInt(30,180); 
+var sunRadius = getRandomInt(7,18); 
+
+
+//big green thing
+var mountainX = getRandomInt(-200,1200); 
+var mountainY = getRandomInt(150,800); 
+var mountainRadius = getRandomInt(400,700); 
+var mountainDegree =  Math.random()+1.2;
+
+//mountains
+var triangleX1 = getRandomInt(130,800);
+var triangleY1 = getRandomInt(130,190);
+var triangleX2 = triangleX1 - getRandomInt(500,1000);
+var triangleY2 = getRandomInt(210,250);
+var triangleX3 = triangleX1 + getRandomInt(500,1000);
+var triangleY3 = triangleY2;
+
+var triangleX4 = getRandomInt(-200,800);
+var triangleY4 = getRandomInt(100,130);
+var triangleX5 = triangleX4 - getRandomInt(500,1000);
+var triangleY5 = triangleY2;
+var triangleX6 = triangleX4 + getRandomInt(800,1000);
+var triangleY6 = triangleY2;
+
+var triangleX7 = getRandomInt(-200,800);
+var triangleY7 = getRandomInt(80,100);
+var triangleX8 = triangleX4 - getRandomInt(500,1000);
+var triangleY8 = triangleY2;
+var triangleX9 = triangleX4 + getRandomInt(800,1000);
+var triangleY9 = triangleY2;
+
+
+//little dots
+var dotX1 = getRandomInt(25,975);
+var dotY1 = getRandomInt(430,570);
+var dotX2 = dotX1 + getRandomInt(50,80);
+var dotY2 = dotY1 + getRandomInt(-20,20);
+var dotX3 = dotX1 + getRandomInt(-40,30);
+var dotY3 = dotY1 + getRandomInt(40,70);
+var dotX4 = dotX1 + getRandomInt(-20,10);
+var dotY4 = dotY1 + getRandomInt(-20,20);
+
+
+//grass or tree branch
+
+
+//things to load before window loads
+window.onload = function() {
+	
+
+	//canvas
+	var canvas = document.getElementById("Canvas");
+	var ctx = canvas.getContext('2d');
+
+
+	//background color
+	ctx.fillStyle='#472ab5';
+	ctx.fillRect(0,200,1000,400);
+
+
+
+	//big green thing
+	ctx.beginPath();
+	ctx.arc(mountainX, mountainY, mountainRadius, 1.9 * Math.PI, mountainDegree * Math.PI);
+	ctx.fillStyle = '#282c72';
+	ctx.fill();
+
+
+	//strokes
+	ctx.strokeStyle="#282c72";
+	ctx.lineWidth = randomWidth;
+	ctx.lineJoin = "miter";
+	ctx.miterLimit = 4;
+	ctx.moveTo(moveToX, moveToY);
+	ctx.lineTo(lineToX1, lineToY1);
+	ctx.lineTo(lineToX2, lineToY2);
+	ctx.stroke();
+
+	//background color - sky
+	ctx.fillStyle='#9fbff9';
+	ctx.fillRect(0,0,1000,200);
+
+
+	//mountains (triangles)
+
+	ctx.beginPath();
+	ctx.moveTo(triangleX7, triangleY7);
+	ctx.lineTo(triangleX8, triangleY8);
+	ctx.lineTo(triangleX9, triangleY9);
+	ctx.closePath();
+	ctx.fillStyle = "#d7d3dc";
+	ctx.fill();
+
+
+	ctx.beginPath();
+	ctx.moveTo(triangleX4, triangleY4);
+	ctx.lineTo(triangleX5, triangleY5);
+	ctx.lineTo(triangleX6, triangleY6);
+	ctx.closePath();
+	ctx.fillStyle = "#d3d2e6";
+	ctx.fill();
+
+
+	ctx.beginPath();
+	ctx.moveTo(triangleX1, triangleY1);
+	ctx.lineTo(triangleX2, triangleY2);
+	ctx.lineTo(triangleX3, triangleY3);
+	ctx.closePath();
+	ctx.fillStyle = "#ada3de";
+	ctx.fill();
+
+
+
+
+
+	//sun
+	ctx.beginPath();
+	ctx.arc(sunX, sunY, sunRadius, 0, 2 * Math.PI);
+	ctx.fillStyle = "#fe812e";
+	ctx.fill();
+
+	//little dots
+	ctx.beginPath();
+	ctx.moveTo(dotX1, dotY1);
+	ctx.lineTo(dotX2, dotY2);
+	ctx.lineTo(dotX3, dotY3);
+	ctx.lineTo(dotX4, dotY4);
+	ctx.lineto(dotX1, dotY1);
+	ctx.closePath();
+	ctx.fillStyle = "#654fad";
+	ctx.fill();
+
+
+
+	//grass or tree branch
+
+
+
+//last drawn object is on top
+
+};
+
+
+</script>
+
+
+<canvas id="Canvas" width="1000" height="600"></canvas>
+
+
+
+
+</body>
+
+</html>
