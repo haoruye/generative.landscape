@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	 Generative Landscape       
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+
+<style>
+	
+img.Image{
+    height:100%;
+    max-height:350px
+};
+
+
+h1 {
+    font-size: 20px;
+	font-family: bookman old style;
+	font-weight: 100px;
+}
+
+a{
+	font-size: 15px;
+}
+
+a:link {
+    color: #282828;
+    background-color: transparent;
+    text-decoration: underline;
+    font: bookman old style; 
+}
+a:visited {
+    color: #282828;
+    background-color: transparent;
+    text-decoration: none;
+    font: bookman old style;
+}
+a:hover {
+    color: #c0c0c0;
+    background-color: #000000;
+    text-decoration: none;
+    font: bookman old style;
+}
+a:active {
+    color: #c0c0c0;
+    background-color: #000000;
+    text-decoration: none;
+    font: bookman old style;
+}
+
+</style>
+
+
+</head>
+<body>
+	
+	
+	
+
+
+<script>
+	
+//generate random int
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); 
+//The maximum is exclusive and the minimum is inclusive
+}
+
+
+
+
+//strokes
+var moveToX = getRandomInt(0,1000); 
+var moveToY = getRandomInt(300,700); 
+
+var lineToX1 = getRandomInt(0,1000); 
+var lineToY1 = getRandomInt(220,550);  
+
+var lineToX2 = getRandomInt(0,1000); 
+var lineToY2 = getRandomInt(220,550); 
+
+var randomWidth = getRandomInt(80,300);
+
+function getRandomColorStroke() {
+  var red = Math.floor(Math.random()* 40);
+  var green = Math.floor(Math.random() * 30);
+  var blue = Math.floor(Math.random() * 100);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+//sun
+var sunX = getRandomInt(30,970); 
+var sunY = getRandomInt(30,180); 
+var sunRadius = getRandomInt(7,18); 
+
+function getRandomColorSun() {
+  var red = getRandomInt(220,250);
+  var green = getRandomInt(220,250);
+  var blue = getRandomInt(60,110);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+//sky color
+function getRandomColorSky() {
+  var red = getRandomInt(140,170);
+  var green = getRandomInt(190,256);
+  var blue = getRandomInt(190,256);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+//arc
+var arcX = getRandomInt(-200,1200); 
+var arcY = getRandomInt(150,800); 
+var arcRadius = getRandomInt(400,700); 
+var arcDegree =  Math.random()+1.2;
+
+function getRandomColorArc() {
+  var red = Math.floor(Math.random()* 40);
+  var green = Math.floor(Math.random() * 30);
+  var blue = Math.floor(Math.random() * 100);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+//mountains in the background
+var triangleX1 = getRandomInt(130,800);
+var triangleY1 = getRandomInt(130,190);
+var triangleX2 = triangleX1 - getRandomInt(500,1000);
+var triangleY2 = getRandomInt(210,250);
+var triangleX3 = triangleX1 + getRandomInt(500,1000);
+var triangleY3 = triangleY2;
+
+var triangleX4 = getRandomInt(-200,800);
+var triangleY4 = getRandomInt(100,130);
+var triangleX5 = triangleX4 - getRandomInt(500,1000);
+var triangleY5 = triangleY2;
+var triangleX6 = triangleX4 + getRandomInt(800,1000);
+var triangleY6 = triangleY2;
+
+var triangleX7 = getRandomInt(-200,800);
+var triangleY7 = getRandomInt(80,100);
+var triangleX8 = triangleX4 - getRandomInt(500,1000);
+var triangleY8 = triangleY2;
+var triangleX9 = triangleX4 + getRandomInt(800,1000);
+var triangleY9 = triangleY2;
+
+
+function getRandomColorMountain() {
+  var red = getRandomInt(190,220);
+  var green = getRandomInt(190,220);
+  var blue = getRandomInt(190,220);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+
+//small forms in foreground
+var formX1 = getRandomInt(-100,1100);
+var formY1 = getRandomInt(590,630);
+var formX2 = formX1 + getRandomInt(-10,30);
+var formY2 = formY1 + getRandomInt(-60,20);
+var formX3 = formX2 + getRandomInt(-10,10);
+var formY3 = formY2 + getRandomInt(-100,-50);
+var formX4 = formX3 + getRandomInt(-10,10);
+var formY4 = formY3 + getRandomInt(-10,10);
+
+
+var form2X2 = formX1 + getRandomInt(-20,20);
+var form2Y2 = formY1 + getRandomInt(-50,20);
+var form2X3 = formX2 + getRandomInt(-20,20);
+var form2Y3 = formY2 + getRandomInt(-130,-65);
+var form2X4 = formX3 + getRandomInt(-10,10);
+var form2Y4 = formY3 + getRandomInt(-10,-30);
+
+
+
+var form3X2 = formX1 + getRandomInt(-30,10);
+var form3Y2 = formY1 + getRandomInt(-50,20);
+var form3X3 = formX2 + getRandomInt(-30,20);
+var form3Y3 = formY2 + getRandomInt(-80,-30);
+var form3X4 = formX3 + getRandomInt(-15,15);
+var form3Y4 = formY3 + getRandomInt(-70,-90);
+
+
+
+
+function getRandomColorForm() {
+  var red = getRandomInt(0,100);
+  var green = getRandomInt(0,130);
+  var blue = getRandomInt(20,130);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+
+function getRandomColorLand() {
+  var red = getRandomInt(10,80);
+  var green = getRandomInt(80,120);
+  var blue = getRandomInt(70,120);
+  return "rgb("+red+","+green+"," +blue+" )";  
+}
+
+//things to load before window loads
+window.onload = function() {
+	
+
+	//canvas
+	var canvas = document.getElementById("Canvas");
+	var ctx = canvas.getContext('2d');
+
+
+	//background color
+	ctx.fillStyle=getRandomColorLand();
+	ctx.fillRect(0,200,1000,400);
+
+
+
+	//arc
+	ctx.beginPath();
+	ctx.arc(arcX, arcY, arcRadius, 1.9 * Math.PI, arcDegree * Math.PI);
+	ctx.fillStyle = getRandomColorArc();
+	ctx.fill();
+
+
+	//strokes
+	ctx.strokeStyle= getRandomColorStroke();
+	ctx.lineWidth = randomWidth;
+	ctx.lineJoin = "miter";
+	ctx.miterLimit = 4;
+	ctx.moveTo(moveToX, moveToY);
+	ctx.lineTo(lineToX1, lineToY1);
+	ctx.lineTo(lineToX2, lineToY2);
+	ctx.stroke();
+
+	//background color - sky
+	ctx.fillStyle=getRandomColorSky();
+	ctx.fillRect(0,0,1000,200);
+
+
+	//mountains (triangles)
+
+	ctx.beginPath();
+	ctx.moveTo(triangleX7, triangleY7);
+	ctx.lineTo(triangleX8, triangleY8);
+	ctx.lineTo(triangleX9, triangleY9);
+	ctx.closePath();
+	ctx.fillStyle = getRandomColorMountain();
+	ctx.fill();
+
+
+	ctx.beginPath();
+	ctx.moveTo(triangleX4, triangleY4);
+	ctx.lineTo(triangleX5, triangleY5);
+	ctx.lineTo(triangleX6, triangleY6);
+	ctx.closePath();
+	ctx.fillStyle = getRandomColorMountain();
+	ctx.fill();
+
+
+	ctx.beginPath();
+	ctx.moveTo(triangleX1, triangleY1);
+	ctx.lineTo(triangleX2, triangleY2);
+	ctx.lineTo(triangleX3, triangleY3);
+	ctx.closePath();
+	ctx.fillStyle = getRandomColorMountain();
+	ctx.fill();
+
+
+
+
+
+	//sun
+	ctx.beginPath();
+	ctx.arc(sunX, sunY, sunRadius, 0, 2 * Math.PI);
+	ctx.fillStyle = getRandomColorSun();
+	ctx.fill();
+
+	//small forms in foreground
+
+
+	ctx.beginPath();
+	ctx.moveTo(formX1, formY1);
+	ctx.lineTo(form3X2, form3Y2);
+	ctx.lineTo(form3X3, form3Y3);
+	ctx.lineTo(form3X4, form3Y4);
+	ctx.closePath();
+
+	ctx.fillStyle = getRandomColorForm();
+	ctx.fill();
+
+
+
+
+//last drawn object is on top
+
+};
+
+
+</script>
+
+
+<canvas id="Canvas" width="1000" height="600"></canvas>
+
+
+
+
+</body>
+
+</html>
